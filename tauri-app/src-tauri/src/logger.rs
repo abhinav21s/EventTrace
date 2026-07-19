@@ -4,7 +4,7 @@ use std::fs::OpenOptions;
 use std::io::{self, Read, Write};
 use std::sync::OnceLock;
 
-pub static FILE_NAME: OnceLock<String> = OnecLock::new();
+pub static FILE_NAME: OnceLock<String> = OnceLock::new();
 
 pub fn create_filename()  {
     let now = Local::now();

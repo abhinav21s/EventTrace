@@ -7,7 +7,7 @@ mod listener;
 fn start_logging() {
     logger::create_filename();
     std::thread::spawn(|| {
-        listener::start_listener();
+        listener::call_listener();
     });
 }
 
