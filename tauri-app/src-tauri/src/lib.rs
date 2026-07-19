@@ -4,8 +4,8 @@ mod listener;
 
 #[tauri::command]
 
-fn start_logging() {
-    logger::create_filename();
+fn start_logging(folderPath:String) {
+    logger::create_filename(folderPath);
     std::thread::spawn(|| {
         listener::call_listener();
     });
@@ -15,6 +15,7 @@ fn start_logging() {
 pub fn run() {
 
     tauri::Builder::default()
+         .plugin(tauri_plugin_dialog::init())
         .plugin(tauri_plugin_opener::init())
         .invoke_handler(tauri::generate_handler![start_logging])
         .run(tauri::generate_context!())

@@ -3,14 +3,15 @@ use chrono::Local;
 use std::fs::OpenOptions;
 use std::io::{self, Read, Write};
 use std::sync::OnceLock;
-
+use std::path::Path;
 pub static FILE_NAME: OnceLock<String> = OnceLock::new();
 
-pub fn create_filename()  {
+pub fn create_filename(filePath:String)  {
     let now = Local::now();
     let timestamp = now.format("%Y-%m-%d_%H-%M-%S");
-    let filename=format!("activity_{}.csv", timestamp);
-    FILE_NAME.set(filename).unwrap();
+  let full_path = Path::new(&filePath)
+    .join(format!("activity_{}.csv", timestamp));
+    FILE_NAME.set(full_path.to_string_lossy().to_string()).unwrap();
 }
 
 pub fn file_creation_and_write(msg: String) -> io::Result<()> {
