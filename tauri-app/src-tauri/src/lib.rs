@@ -1,7 +1,11 @@
 // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
+mod logger;
+mod listener;
+
 #[tauri::command]
 
 fn start_logging() {
+    logger::create_filename();
     std::thread::spawn(|| {
         listener::start_listener();
     });

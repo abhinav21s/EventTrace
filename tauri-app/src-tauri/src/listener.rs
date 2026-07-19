@@ -1,5 +1,7 @@
-
+use rdev::{Event,EventType,listen,Button};
 use crate::logger::file_creation_and_write;
+
+
 pub fn callback(event:Event){
     match event.event_type{
         EventType::KeyPress(key)=>{
