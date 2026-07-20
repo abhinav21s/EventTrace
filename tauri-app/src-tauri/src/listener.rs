@@ -45,6 +45,7 @@ match *state{
 }
 }
 pub fn callback(event:Event){
+
     let should_start={
          let state=CURRENT_STATE.get().unwrap().lock().unwrap();
 
@@ -54,7 +55,7 @@ pub fn callback(event:Event){
    if !should_start {
     return;
    }
-   
+    println!("{:?}", event.event_type);
     match event.event_type{
         EventType::KeyPress(key)=>{
        let msg=format!("Key pressed is {:?} at time {:?}\n",key,event.time);
