@@ -5,6 +5,7 @@ mod listener;
 #[tauri::command]
 
 fn start_logging(folderPath:String) {
+    logger::init_filename();
     logger::create_filename(folderPath);
     listener::init_state();
     std::thread::spawn(|| {
@@ -23,6 +24,10 @@ fn resume_event(){
 fn new_session(folderPath:String){
    listener::new_session(folderPath)
 }
+#[tauri::command]
+fn stop_logging(){
+    listener::stop_logging();
+}
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
 
@@ -31,7 +36,9 @@ pub fn run() {
         .plugin(tauri_plugin_opener::init())
         .invoke_handler(tauri::generate_handler![start_logging,
             pause_event,
-            resume_event])
+            resume_event,
+            stop_logging,
+            new_session])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }

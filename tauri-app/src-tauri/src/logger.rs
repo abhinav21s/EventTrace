@@ -2,25 +2,31 @@ use std::fs::File;
 use chrono::Local;
 use std::fs::OpenOptions;
 use std::io::{self, Read, Write};
-use std::sync::OnceLock;
+use std::sync::{OnceLock ,Mutex};
 use std::path::Path;
-pub static FILE_NAME: OnceLock<String> = OnceLock::new();
+pub static FILE_NAME: OnceLock<Mutex<String>> = OnceLock::new();
 
-pub fn create_filename(filePath:String)  {
-    let now = Local::now();
+pub fn init_filename(){
+    let _=FILE_NAME.set(Mutex::new(String::new()));
+}
+pub fn create_filename(folderPath:String)  {
+     let now = Local::now();
     let timestamp = now.format("%Y-%m-%d_%H-%M-%S");
-  let full_path = Path::new(&filePath)
-    .join(format!("activity_{}.csv", timestamp));
-    FILE_NAME.set(full_path.to_string_lossy().to_string()).unwrap();
+
+    let full_path = Path::new(&folderPath)
+        .join(format!("activity_{}.csv", timestamp));
+
+    let mut filename = FILE_NAME.get().unwrap().lock().unwrap();
+    *filename = full_path.to_string_lossy().to_string();
 }
 
 pub fn file_creation_and_write(msg: String) -> io::Result<()> {
-    let filename = FILE_NAME.get().unwrap();
+    let filename = FILE_NAME.get().unwrap().lock().unwrap();
     // Opens with read/write access, creating the file if it doesn't exist
     let mut file = OpenOptions::new()
         .append(true)
         .create(true)
-        .open(filename)?;
+        .open(&*filename)?;
 
     // The file handle stays open here for any mixed I/O operations
 

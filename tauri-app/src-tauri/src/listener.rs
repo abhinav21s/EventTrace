@@ -47,12 +47,41 @@ match *state{
 }
 }
 
+pub fn stop_logging() {
+    let mut state = CURRENT_STATE.get().unwrap().lock().unwrap();
+
+    match *state {
+        Loggedstate::Stoped => {
+            println!("Already stopped");
+        }
+        _ => {
+            *state = Loggedstate::Stoped;
+            println!("Logging stopped");
+        }
+    }
+}
+
 pub fn new_session(folderPath:String){
-     let mut state=CURRENT_STATE.get().unwrap().lock().unwrap();
-     *state=Loggedstate::Logging;
-     create_filename(folderPath);
-  
-    
+{
+        let mut state = CURRENT_STATE.get().unwrap().lock().unwrap();
+
+        match *state {
+            Loggedstate::Logging => {
+                println!("Already logging");
+                return;
+            }
+            _ => {}
+        }
+    }
+
+    create_filename(folderPath);
+
+    {
+        let mut state = CURRENT_STATE.get().unwrap().lock().unwrap();
+        *state = Loggedstate::Logging;
+    }
+
+    println!("New logging session started");   
 }
 pub fn callback(event:Event){
 

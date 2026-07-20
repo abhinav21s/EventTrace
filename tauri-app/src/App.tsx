@@ -28,7 +28,7 @@ function App() {
   }
   async function stop_event(){
     setsession(true)
-    await invoke("pause_event");
+    await invoke("stop_logging");
   }
   async function new_session(){
     setsession(false)
