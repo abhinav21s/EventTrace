@@ -6,6 +6,7 @@ import "./App.css";
 
 function App() {
 
+  const [session,setsession]=useState(false);
   async function start_logging() {
     // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
     const folder= await open({
@@ -25,6 +26,24 @@ function App() {
   async function pause_event(){
     await invoke("pause_event");
   }
+  async function stop_event(){
+    setsession(true)
+    await invoke("pause_event");
+  }
+  async function new_session(){
+    setsession(false)
+    const folder=await open(
+      {
+        directory:true,
+        multiple:false
+      }
+    )
+
+    if(!folder){
+      return
+    }
+    await invoke("new_session",{folderPath:folder});
+  }
   return (
     <div className="main">
       <h1>Welcome to EventTrace</h1>
@@ -32,6 +51,7 @@ function App() {
       <button onClick={start_logging}>Start Logging</button>
       <button onClick={resume_event}>Resume</button>
       <button onClick={pause_event}>Pause</button>
+     {session?<button onClick={new_session}>Create New Session</button>:<button onClick={stop_event}>Stop</button>}
     </div>
   );
 }

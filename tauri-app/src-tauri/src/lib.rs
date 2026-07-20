@@ -19,6 +19,10 @@ fn pause_event(){
 fn resume_event(){
     listener::resume_event();
 }
+#[tauri::command]
+fn new_session(folderPath:String){
+   listener::new_session(folderPath)
+}
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
 

@@ -1,11 +1,13 @@
 use rdev::{Event,EventType,listen,Button};
 use crate::logger::file_creation_and_write;
+use crate::logger::create_filename;
 use std::sync::Mutex;
 use std::sync::OnceLock;
 #[derive(Debug)]
  enum Loggedstate{
    Paused,
-   Logging
+   Logging,
+   Stoped
 }
 static CURRENT_STATE:OnceLock<Mutex<Loggedstate>>=OnceLock::new();
 pub fn init_state(){
@@ -43,6 +45,14 @@ match *state{
         println!("Event Resumed-------------------------------------------------------------------");
     }
 }
+}
+
+pub fn new_session(folderPath:String){
+     let mut state=CURRENT_STATE.get().unwrap().lock().unwrap();
+     *state=Loggedstate::Logging;
+     create_filename(folderPath);
+  
+    
 }
 pub fn callback(event:Event){
 
