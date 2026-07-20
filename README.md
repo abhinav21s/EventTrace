@@ -194,7 +194,7 @@ Future versions may include preprocessing pipelines to convert raw event logs in
 # Future Roadmap
 
 * System tray support
-* Pause/Resume logging
+* Pause/Resume logging -- implemented
 * Start/Stop logging
 * Event visualization dashboard
 * Log search and filtering

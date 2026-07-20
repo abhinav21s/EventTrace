@@ -17,12 +17,21 @@ function App() {
     }
     await invoke("start_logging",{folderPath:folder} );
   }
+  
+  async function resume_event(){
+    await invoke("resume_event");
+  }
 
+  async function pause_event(){
+    await invoke("pause_event");
+  }
   return (
     <div className="main">
       <h1>Welcome to EventTrace</h1>
       <div>start tracking</div>
       <button onClick={start_logging}>Start Logging</button>
+      <button onClick={resume_event}>Resume</button>
+      <button onClick={pause_event}>Pause</button>
     </div>
   );
 }

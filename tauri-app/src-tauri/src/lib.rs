@@ -6,11 +6,19 @@ mod listener;
 
 fn start_logging(folderPath:String) {
     logger::create_filename(folderPath);
+    listener::init_state();
     std::thread::spawn(|| {
         listener::call_listener();
     });
 }
 
+fn pause_event(){
+    listener::pause_event();
+}
+
+fn resume_event(){
+    listener::resume_event();
+}
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
 

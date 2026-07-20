@@ -1,8 +1,60 @@
 use rdev::{Event,EventType,listen,Button};
 use crate::logger::file_creation_and_write;
+use std::sync::Mutex;
+use std::sync::OnceLock;
+#[derive(Debug)]
+ enum Loggedstate{
+   Paused,
+   Logging
+}
+static CURRENT_STATE:OnceLock<Mutex<Loggedstate>>=OnceLock::new();
+pub fn init_state(){
+    
+    let _= CURRENT_STATE.set(Mutex::new(Loggedstate::Logging));
+}
 
 
+pub fn pause_event(){
+
+let mut state=CURRENT_STATE.get().unwrap().lock().unwrap();
+match *state{
+        Loggedstate::Paused=>{
+            println!("The event is already paused");
+        }
+        _=>{
+            
+            *state=Loggedstate::Paused;
+            println!("Event Paused -------------------------------------------------------------");
+        }
+    }
+}
+    
+   
+
+pub fn resume_event(){
+    let mut state=CURRENT_STATE.get().unwrap().lock().unwrap();
+match *state{
+    Loggedstate::Logging=>{
+        println!("The event is already resumed");
+    }
+    _=>{
+        
+        *state=Loggedstate::Logging;
+        println!("Event Resumed-------------------------------------------------------------------");
+    }
+}
+}
 pub fn callback(event:Event){
+    let should_start={
+         let state=CURRENT_STATE.get().unwrap().lock().unwrap();
+
+         matches!(*state,Loggedstate::Logging )
+    };
+   
+   if !should_start {
+    return;
+   }
+   
     match event.event_type{
         EventType::KeyPress(key)=>{
        let msg=format!("Key pressed is {:?} at time {:?}\n",key,event.time);
@@ -49,6 +101,7 @@ pub fn callback(event:Event){
         file_creation_and_write(msg);
     }
 }
+     
 } 
 
 pub fn call_listener(){
