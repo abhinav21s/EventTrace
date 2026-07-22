@@ -202,21 +202,6 @@ Planned improvements include:
 - Application-specific logging
 ---
 
-## Screenshots
-
-> Add screenshots of the application here.
-
-Example:
-
-```
-images/
-├── home.png
-├── analytics.png
-├── tray.png
-```
-
----
-
 ## Ethical Use
 
 EventTrace is intended **only** for use on systems that you own or where you have explicit permission to collect interaction data.
