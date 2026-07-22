@@ -1,7 +1,7 @@
 // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
 mod listener;
 mod logger;
-mod tray;
+use crate::listener::AnalyticsResponse;
 use std::sync::OnceLock;
 use tauri::{
     menu::{Menu, MenuItem},
@@ -35,6 +35,10 @@ fn new_session(folderPath: String) {
 #[tauri::command]
 fn stop_logging() {
     listener::stop_logging();
+}
+#[tauri::command]
+fn display_count()->AnalyticsResponse{
+    listener::display_count()
 }
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
@@ -153,7 +157,8 @@ pub fn run() {
             pause_event,
             resume_event,
             stop_logging,
-            new_session
+            new_session,
+            display_count
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
