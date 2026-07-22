@@ -91,29 +91,34 @@ function App() {
 
   }
  return (
-  <div className="min-h-screen bg-slate-900 text-white p-8">
+  <div className="min-h-screen bg-slate-950 text-white px-10 py-8">
+
     {/* Header */}
-    <div className="mb-8 border-b border-slate-700 pb-4">
-      <h1 className="text-4xl font-bold tracking-wide">EventTrace</h1>
-      <p className="text-slate-400 mt-2">
-        Desktop Activity Logger & Session Analytics
+    <div className="mb-10">
+      <h1 className="text-5xl font-bold tracking-wide text-blue-400">
+        EventTrace
+      </h1>
+
+      <p className="text-slate-400 mt-2 text-lg">
+        Desktop Activity Logger
       </p>
     </div>
 
-    <div className="grid grid-cols-2 gap-8">
+    <div className="grid lg:grid-cols-3 gap-8">
 
-      {/* Controls */}
-      <div className="bg-slate-800 rounded-2xl shadow-xl p-6">
+      {/* ================= Controls ================= */}
+
+      <div className="bg-slate-900 border border-slate-700 rounded-3xl shadow-xl p-7">
 
         <h2 className="text-2xl font-semibold mb-6">
           Logging Controls
         </h2>
 
-        <div className="grid gap-4">
+        <div className="flex flex-col gap-4">
 
           <button
             onClick={start_logging}
-            className="flex items-center justify-center gap-3 bg-green-600 hover:bg-green-700 transition rounded-xl py-3 font-semibold"
+            className="flex items-center justify-center gap-3 rounded-xl bg-green-600 hover:bg-green-700 active:scale-95 transition-all py-3 font-semibold shadow-lg"
           >
             <Play size={20} />
             Start Logging
@@ -121,24 +126,24 @@ function App() {
 
           <button
             onClick={pause_event}
-            className="flex items-center justify-center gap-3 bg-yellow-500 hover:bg-yellow-600 transition rounded-xl py-3 font-semibold"
+            className="flex items-center justify-center gap-3 rounded-xl bg-yellow-500 hover:bg-yellow-600 active:scale-95 transition-all py-3 font-semibold shadow-lg"
           >
             <Pause size={20} />
-            Pause
+            Pause Logging
           </button>
 
           <button
             onClick={resume_event}
-            className="flex items-center justify-center gap-3 bg-blue-600 hover:bg-blue-700 transition rounded-xl py-3 font-semibold"
+            className="flex items-center justify-center gap-3 rounded-xl bg-blue-600 hover:bg-blue-700 active:scale-95 transition-all py-3 font-semibold shadow-lg"
           >
             <RotateCcw size={20} />
-            Resume
+            Resume Logging
           </button>
 
           {session ? (
             <button
               onClick={new_session}
-              className="flex items-center justify-center gap-3 bg-purple-600 hover:bg-purple-700 transition rounded-xl py-3 font-semibold"
+              className="flex items-center justify-center gap-3 rounded-xl bg-purple-600 hover:bg-purple-700 active:scale-95 transition-all py-3 font-semibold shadow-lg"
             >
               <FilePlus size={20} />
               New Session
@@ -146,7 +151,7 @@ function App() {
           ) : (
             <button
               onClick={stop_event}
-              className="flex items-center justify-center gap-3 bg-red-600 hover:bg-red-700 transition rounded-xl py-3 font-semibold"
+              className="flex items-center justify-center gap-3 rounded-xl bg-red-600 hover:bg-red-700 active:scale-95 transition-all py-3 font-semibold shadow-lg"
             >
               <Square size={20} />
               Stop Logging
@@ -155,75 +160,95 @@ function App() {
 
           <button
             onClick={showanalytics}
-            className="flex items-center justify-center gap-3 bg-slate-700 hover:bg-slate-600 transition rounded-xl py-3 font-semibold"
+            className="flex items-center justify-center gap-3 rounded-xl bg-slate-700 hover:bg-slate-600 active:scale-95 transition-all py-3 font-semibold shadow-lg"
           >
             <BarChart3 size={20} />
             Refresh Analytics
           </button>
 
         </div>
+
+        <div className="mt-8 border-t border-slate-700 pt-5">
+
+          <h3 className="font-semibold text-lg mb-3">
+            Instructions
+          </h3>
+
+          <ul className="space-y-2 text-sm text-slate-400">
+            <li>• Choose a folder before starting logging.</li>
+            <li>• Pause and Resume whenever required.</li>
+            <li>• Stop logging before creating a new session.</li>
+            <li>• Click Refresh Analytics to update statistics.</li>
+          </ul>
+
+        </div>
+
       </div>
 
-      {/* Analytics */}
-      <div className="bg-slate-800 rounded-2xl shadow-xl p-6">
+      {/* ================= Analytics ================= */}
 
-        <h2 className="text-2xl font-semibold mb-6">
-          Session Analytics
-        </h2>
+      <div className="lg:col-span-2 bg-slate-900 border border-slate-700 rounded-3xl shadow-xl p-7">
 
-        <div className="grid grid-cols-2 gap-4">
+        <div className="flex items-center gap-3 mb-7">
+          <BarChart3 className="text-blue-400" size={28} />
+          <h2 className="text-3xl font-semibold">
+            Session Analytics
+          </h2>
+        </div>
 
-          <div className="bg-slate-700 rounded-xl p-4">
+        <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-5">
+
+          <div className="bg-slate-800 rounded-2xl p-5 border border-slate-700">
             <p className="text-slate-400">Sessions</p>
-            <p className="text-3xl font-bold">{count.session_count}</p>
+            <p className="text-4xl font-bold mt-2">{count.session_count}</p>
           </div>
 
-          <div className="bg-slate-700 rounded-xl p-4">
+          <div className="bg-slate-800 rounded-2xl p-5 border border-slate-700">
             <div className="flex items-center gap-2 text-slate-400">
               <Keyboard size={18} />
               Keyboard
             </div>
-            <p className="text-3xl font-bold">{count.key_count}</p>
+            <p className="text-4xl font-bold mt-2">{count.key_count}</p>
           </div>
 
-          <div className="bg-slate-700 rounded-xl p-4">
+          <div className="bg-slate-800 rounded-2xl p-5 border border-slate-700">
             <div className="flex items-center gap-2 text-slate-400">
               <MousePointerClick size={18} />
               Left Clicks
             </div>
-            <p className="text-3xl font-bold">{count.left_clicks}</p>
+            <p className="text-4xl font-bold mt-2">{count.left_clicks}</p>
           </div>
 
-          <div className="bg-slate-700 rounded-xl p-4">
+          <div className="bg-slate-800 rounded-2xl p-5 border border-slate-700">
             <div className="flex items-center gap-2 text-slate-400">
               <MousePointerClick size={18} />
               Right Clicks
             </div>
-            <p className="text-3xl font-bold">{count.right_clicks}</p>
+            <p className="text-4xl font-bold mt-2">{count.right_clicks}</p>
           </div>
 
-          <div className="bg-slate-700 rounded-xl p-4">
+          <div className="bg-slate-800 rounded-2xl p-5 border border-slate-700">
             <div className="flex items-center gap-2 text-slate-400">
               <Mouse size={18} />
               Middle Clicks
             </div>
-            <p className="text-3xl font-bold">{count.middle_clicks}</p>
+            <p className="text-4xl font-bold mt-2">{count.middle_clicks}</p>
           </div>
 
-          <div className="bg-slate-700 rounded-xl p-4">
+          <div className="bg-slate-800 rounded-2xl p-5 border border-slate-700">
             <div className="flex items-center gap-2 text-slate-400">
               <Move size={18} />
-              Mouse Moves
+              Mouse Movement
             </div>
-            <p className="text-3xl font-bold">{count.mouse_move}</p>
+            <p className="text-4xl font-bold mt-2">{count.mouse_move}</p>
           </div>
 
-          <div className="bg-slate-700 rounded-xl p-4 col-span-2">
+          <div className="bg-slate-800 rounded-2xl p-5 border border-slate-700 md:col-span-2 xl:col-span-3">
             <div className="flex items-center gap-2 text-slate-400">
               <Mouse size={18} />
-              Scroll Wheel
+              Mouse Wheel Scroll
             </div>
-            <p className="text-3xl font-bold">{count.wheel}</p>
+            <p className="text-4xl font-bold mt-2">{count.wheel}</p>
           </div>
 
         </div>
@@ -231,6 +256,7 @@ function App() {
       </div>
 
     </div>
+
   </div>
 );
 }
