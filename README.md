@@ -1,123 +1,111 @@
 # EventTrace
 
-EventTrace is a cross-platform desktop application built with **Rust**, **Tauri**, and **React** that captures global keyboard and mouse interactions and stores them in structured, timestamped CSV files.
+EventTrace is a cross-platform desktop application built with **Rust**, **Tauri**, and **React** that captures global keyboard and mouse activity and stores it as structured, timestamped CSV datasets.
 
-The primary goal of this project is to generate high-quality behavioral datasets that can be used for:
-
-* Machine Learning research
-* Behavioral analysis
-* Human-Computer Interaction (HCI) studies
-* User activity analytics
-* Training intelligent software agents
-* Studying interaction patterns for autonomous and agentic AI systems
-
-EventTrace serves as both a systems programming project and a data collection platform for researchers and developers interested in understanding how users interact with computers.
-
-> **Ethical Use Notice:** EventTrace is intended only for use on systems you own or where you have explicit permission to collect interaction data. Any datasets collected should comply with applicable privacy laws and organizational policies.
+Designed with performance, modularity, and extensibility in mind, EventTrace enables developers and researchers to collect high-quality interaction data for behavioral analytics, Human-Computer Interaction (HCI), and Machine Learning applications.
 
 ---
 
-# Features
+## Features
 
-* Global keyboard event logging
-* Global mouse event logging
-* Timestamped CSV log generation
-* One log file per application session
-* Native desktop application using Tauri
-* React-powered user interface
-* Modular Rust backend
-* Cross-platform architecture (Windows, Linux, and macOS)
+### Event Logging
+
+- Global keyboard event tracking
+- Global mouse event tracking
+- Timestamped event recording
+- Automatic CSV generation
+- One log file per session
+- High-performance Rust backend
+
+### Session Management
+
+- Start logging
+- Pause logging
+- Resume logging
+- Stop logging
+- Create a new logging session
+- Multiple independent session logs
+
+### Analytics
+
+- Session statistics
+- Keyboard event count
+- Mouse click count
+- Mouse movement count
+- Scroll wheel count
+- Live session analytics
+
+### Desktop Features
+
+- Native desktop application
+- System tray support
+- Hide to tray
+- Restore window from tray
+- Lightweight memory usage
+- Cross-platform architecture
+
+---
+## Applications
+
+EventTrace generates structured interaction datasets that can support:
+
+- Human-Computer Interaction (HCI) research
+- User behavior analysis
+- Productivity and workflow studies
+- Academic research
+- Desktop interaction analytics
+- Machine learning dataset preparation
+- Sequential event analysis
+- Research on intelligent user interfaces
+
+The generated CSV logs can be further processed into datasets for machine learning models, behavioral analysis, or visualization pipelines.
 
 ---
 
-# Why EventTrace?
+## Technology Stack
 
-Modern AI systems increasingly benefit from learning how humans interact with software and operating systems.
+### Frontend
 
-EventTrace provides a lightweight framework for collecting interaction data that can later be transformed into datasets for:
+- React
+- TypeScript
+- Vite
 
-* Sequence modeling
-* User behavior prediction
-* Intelligent automation
-* Reinforcement learning environments
-* Agentic AI training pipelines
-* Human-in-the-loop learning
-* Productivity pattern analysis
-* Workflow optimization
+### Backend
 
-The generated logs can be further processed into features suitable for training machine learning models such as Transformers, RNNs, LSTMs, Temporal CNNs, Hidden Markov Models, or reinforcement learning agents.
+- Rust
+- Tauri
 
----
+### Rust Crates
 
-# Technology Stack
-
-## Frontend
-
-* React
-* JavaScript
-* Vite
-
-## Backend
-
-* Rust
-* Tauri
-
-## Rust Crates
-
-* rdev
-* chrono
-* tauri
-* tauri-plugin-opener
+- rdev
+- chrono
+- serde
+- tauri
+- tauri-plugin-opener
 
 ---
 
-# Project Structure
+## Installation
 
-```text
-EventTrace/
-│
-├── src/                    # React frontend
-│
-├── src-tauri/
-│   ├── src/
-│   │   ├── main.rs
-│   │   ├── lib.rs
-│   │   ├── listener.rs
-│   │   └── logger.rs
-│   │
-│   ├── Cargo.toml
-│   └── Cargo.lock
-│
-├── package.json
-├── package-lock.json
-└── README.md
-```
+### Prerequisites
 
----
+Install the following before running the project:
 
-# Installation
+- Rust
+- Cargo
+- Node.js (LTS)
+- npm
 
-## Prerequisites
+### Windows Requirements
 
-Install:
-
-* Node.js (LTS recommended)
-* npm
-* Rust
-* Cargo
-
-For Windows also install:
-
-* Visual Studio Build Tools
-* Desktop Development with C++
-* Windows SDK
-
----
+- Visual Studio Build Tools
+- Desktop Development with C++
+- Windows SDK
 
 Clone the repository:
 
 ```bash
-git clone https://github.com/<your-username>/EventTrace.git
+git clone https://github.com/<username>/EventTrace.git
 ```
 
 Navigate into the project:
@@ -134,89 +122,122 @@ npm install
 
 ---
 
-# Running the Application
+## Running the Application
 
-Launch the desktop application in development mode:
+Start the development version:
 
 ```bash
 npm run tauri dev
 ```
 
-This starts:
+This launches:
 
-* React development server
-* Rust backend
-* Native Tauri desktop application
+- React development server
+- Rust backend
+- Native Tauri desktop application
 
 ---
 
-# Production Build
+## Building for Production
 
-Build the application:
+Create a production build:
 
 ```bash
 npm run tauri build
 ```
 
-The compiled executable will be generated in the Tauri build output directory.
+The compiled executable will be available in the Tauri build directory.
 
 ---
 
-# How It Works
+## How EventTrace Works
 
-1. The application starts.
-2. A timestamped CSV file is created for the session.
+1. User starts a logging session.
+2. A timestamped CSV file is created.
 3. Global keyboard and mouse events are captured.
-4. Events are written to the session log.
-5. The generated dataset can later be cleaned, transformed, and used for behavioral analysis or machine learning workflows.
+4. Events are written to the CSV file in real time.
+5. Users can pause, resume, stop, or create a new session.
+6. Session analytics are continuously updated.
+7. The generated datasets can be exported for further analysis or machine learning.
 
 ---
 
-# Potential Machine Learning Applications
+## Generated Dataset
 
-The collected interaction data can be engineered into datasets for:
+Each event records information such as:
 
-* User behavior modeling
-* Intent prediction
-* Workflow recommendation systems
-* Productivity analytics
-* Human-computer interaction research
-* Digital ergonomics studies
-* Intelligent desktop assistants
-* Agentic AI systems that learn user workflows
-* Personalized automation
-* Sequential decision-making models
+- Timestamp
+- Event type
+- Keyboard input
+- Mouse button events
+- Mouse movement
+- Scroll events
 
-Future versions may include preprocessing pipelines to convert raw event logs into feature-rich datasets suitable for model training.
+The datasets are suitable for preprocessing pipelines used in analytics and machine learning workflows.
 
 ---
 
-# Future Roadmap
+## Current Functionality
 
-* System tray support
-* Pause/Resume logging -- implemented
-* Start/Stop logging
-* Event visualization dashboard
-* Log search and filtering
-* Dataset preprocessing utilities
-* Export to CSV, JSON, and Parquet
-* Session analytics
-* User-configurable logging filters
-* Privacy controls and anonymization options
-* Plugin architecture for custom event processors
+- Global event listener
+- CSV logging
+- Multiple logging sessions
+- Pause / Resume logging
+- Stop logging
+- Live analytics
+- System tray integration
+- Native desktop interface
 
 ---
 
-# License
+## Future Roadmap
+
+Planned improvements include:
+
+- Privacy mode (skip password fields)
+- Configurable logging filters
+- JSON and Parquet export
+- Built-in analytics dashboard
+- Dataset preprocessing utilities
+- Application-specific logging
+---
+
+## Screenshots
+
+> Add screenshots of the application here.
+
+Example:
+
+```
+images/
+├── home.png
+├── analytics.png
+├── tray.png
+```
+
+---
+
+## Ethical Use
+
+EventTrace is intended **only** for use on systems that you own or where you have explicit permission to collect interaction data.
+
+Users are responsible for ensuring compliance with applicable privacy laws, organizational policies, and ethical data collection practices.
+
+---
+
+
+## License
 
 This project is licensed under the MIT License.
 
 ---
 
-# Acknowledgements
+## Acknowledgements
 
-* Rust
-* Tauri
-* React
-* rdev
-* Chrono
+- Rust
+- Tauri
+- React
+- Vite
+- rdev
+- Chrono
+- Serde
