@@ -2,14 +2,13 @@
 mod listener;
 mod logger;
 mod tray;
-
 use std::sync::OnceLock;
-use tauri::image::Image;
 use tauri::{
     menu::{Menu, MenuItem},
     tray::TrayIconBuilder,
     Manager,
 };
+use tauri_plugin_dialog::DialogExt;
 
 #[tauri::command]
 
@@ -52,14 +51,14 @@ pub fn run() {
         .setup(|app| {
             let start = MenuItem::with_id(app, "start", "▶ Start Logging", true, None::<&str>)?;
 
-            let pause = MenuItem::with_id(app, "pause", "⏸ Pause Logging", false, None::<&str>)?;
+            let pause = MenuItem::with_id(app, "pause", "⏸ Pause Logging", true, None::<&str>)?;
 
-            let resume = MenuItem::with_id(app, "resume", "▶ Resume Logging", false, None::<&str>)?;
+            let resume = MenuItem::with_id(app, "resume", "▶ Resume Logging", true, None::<&str>)?;
 
-            let new_session =
-                MenuItem::with_id(app, "new_session", "🆕 New Session", false, None::<&str>)?;
+            let new_session_item =
+                MenuItem::with_id(app, "new_session", "🆕 New Session", true, None::<&str>)?;
 
-            let stop = MenuItem::with_id(app, "stop", "⏹ Stop Logging", false, None::<&str>)?;
+            let stop = MenuItem::with_id(app, "stop", "⏹ Stop Logging", true, None::<&str>)?;
 
             let show = MenuItem::with_id(app, "show", "🖥 Show Window", true, None::<&str>)?;
 
@@ -67,9 +66,8 @@ pub fn run() {
 
             let menu = Menu::with_items(
                 app,
-                &[&start, &pause, &resume, &new_session, &stop, &show, &exit],
+                &[&start, &pause, &resume, &new_session_item, &stop, &show, &exit],
             )?;
-
 
             let icon = app
                 .default_window_icon()
@@ -82,22 +80,53 @@ pub fn run() {
                 .on_menu_event(|app, event| match event.id().as_ref() {
                     "start" => {
                         println!("Start clicked");
+                        let app = app.clone();
+
+                        app.dialog().file().pick_folder(move |folder| {
+                            if let Some(folder) = folder {
+                                let path = folder.to_string();
+
+                                println!("Selected folder: {}", path);
+
+                                start_logging(path);
+                            }
+                        });
                     }
 
                     "pause" => {
                         println!("Pause clicked");
+                        pause_event();
                     }
 
                     "resume" => {
                         println!("Resume clicked");
+                        resume_event();
                     }
 
                     "new_session" => {
                         println!("New Session clicked");
+                        let app = app.clone();
+
+                        app.dialog().file().pick_folder(move |folder| {
+                            println!("Folder callback reached");
+
+                            if let Some(folder) = folder {
+                                let path = folder.to_string();
+
+                                println!("Selected folder: {}", path);
+
+                                new_session(path);
+
+                                println!("new_session() finished");
+                            } else {
+                                println!("No folder selected");
+                            }
+                        });
                     }
 
                     "stop" => {
                         println!("Stop clicked");
+                        stop_logging();
                     }
                     "show" => {
                         let window = app.get_webview_window("main").unwrap();
