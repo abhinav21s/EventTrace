@@ -15,7 +15,7 @@ use tauri_plugin_dialog::DialogExt;
 fn start_logging(folderPath: String) {
     logger::init_filename();
     logger::create_filename(folderPath);
-    listener::init_state();
+
     std::thread::spawn(|| {
         listener::call_listener();
     });
@@ -37,7 +37,7 @@ fn stop_logging() {
     listener::stop_logging();
 }
 #[tauri::command]
-fn display_count()->AnalyticsResponse{
+fn display_count() -> AnalyticsResponse {
     listener::display_count()
 }
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
@@ -70,7 +70,15 @@ pub fn run() {
 
             let menu = Menu::with_items(
                 app,
-                &[&start, &pause, &resume, &new_session_item, &stop, &show, &exit],
+                &[
+                    &start,
+                    &pause,
+                    &resume,
+                    &new_session_item,
+                    &stop,
+                    &show,
+                    &exit,
+                ],
             )?;
 
             let icon = app
@@ -147,7 +155,7 @@ pub fn run() {
                     _ => {}
                 })
                 .build(app)?;
-
+            listener::init_state();
             Ok(())
         })
         .plugin(tauri_plugin_dialog::init())

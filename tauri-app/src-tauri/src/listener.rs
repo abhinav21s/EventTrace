@@ -44,6 +44,7 @@ pub fn pause_event() {
         Loggedstate::Paused => {
             println!("The event is already paused");
         }
+       
         _ => {
             *state = Loggedstate::Paused;
             println!("Event Paused -------------------------------------------------------------");
@@ -57,6 +58,7 @@ pub fn resume_event() {
         Loggedstate::Logging => {
             println!("The event is already resumed");
         }
+       
         _ => {
             *state = Loggedstate::Logging;
             println!(
@@ -101,6 +103,7 @@ pub fn stop_logging() {
         Loggedstate::Stopped => {
             println!("Already stopped");
         }
+       
         _ => {
             *state = Loggedstate::Stopped;
             println!("Logging stopped");

@@ -95,7 +95,7 @@ function App() {
 
   }
 return (
-  <div className="min-h-screen bg-[#0b0d12] text-slate-200 antialiased selection:bg-sky-500/20">
+  <div className="min-h-screen bg-[#0b0d12] text-slate-200 antialiased selection:bg-[#0ea5e9]/20">
     {/* very subtle, calm top ambiance */}
     <div className="pointer-events-none fixed inset-x-0 top-0 h-48 bg-gradient-to-b from-white/[0.03] to-transparent" />
 
@@ -105,7 +105,7 @@ return (
       <header className="mb-9 flex flex-col gap-5 border-b border-white/[0.06] pb-7 sm:flex-row sm:items-center sm:justify-between">
         <div className="flex items-center gap-4">
           <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-white/[0.04] ring-1 ring-inset ring-white/10">
-            <Activity className="text-sky-400/90" size={22} />
+            <Activity className="text-[#38bdf8]" size={22} />
           </div>
           <div>
             <h1 className="text-2xl font-semibold tracking-tight text-slate-50 sm:text-3xl">
@@ -121,7 +121,7 @@ return (
         <div className="inline-flex items-center gap-2 self-start rounded-full border border-white/[0.08] bg-white/[0.03] px-3.5 py-1.5 text-sm font-medium sm:self-auto">
           <span
             className={`h-2 w-2 rounded-full ${
-              session ? "bg-slate-600" : "bg-emerald-400/90"
+              session ? "bg-slate-600" : "bg-[#34d399]"
             }`}
           />
           <span className={session ? "text-slate-400" : "text-slate-300"}>
@@ -144,7 +144,7 @@ return (
             <button
               onClick={start_logging}
               title="Choose a folder and begin recording activity"
-              className="group flex items-center gap-3 rounded-lg bg-emerald-600/90 px-4 py-2.5 text-sm font-medium text-white transition-colors hover:bg-emerald-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400/60 focus-visible:ring-offset-2 focus-visible:ring-offset-[#12151c] active:bg-emerald-700"
+              className="group flex items-center gap-3 rounded-lg bg-[#059669] px-4 py-2.5 text-sm font-medium text-white transition-colors hover:bg-[#10b981] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#34d399]/60 focus-visible:ring-offset-2 focus-visible:ring-offset-[#12151c] active:bg-[#047857]"
             >
               <Play size={17} className="shrink-0" />
               Start Logging
@@ -155,7 +155,7 @@ return (
               <button
                 onClick={pause_event}
                 title="Temporarily stop recording"
-                className="flex items-center justify-center gap-2 rounded-lg border border-white/[0.08] bg-white/[0.02] px-3 py-2.5 text-sm font-medium text-slate-300 transition-colors hover:bg-white/[0.05] hover:text-amber-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/20 focus-visible:ring-offset-2 focus-visible:ring-offset-[#12151c] active:bg-white/[0.08]"
+                className="flex items-center justify-center gap-2 rounded-lg border border-white/[0.08] bg-white/[0.02] px-3 py-2.5 text-sm font-medium text-slate-300 transition-colors hover:bg-white/[0.05] hover:text-[#fcd34d] focus:outline-none focus-visible:ring-2 focus-visible:ring-white/20 focus-visible:ring-offset-2 focus-visible:ring-offset-[#12151c] active:bg-white/[0.08]"
               >
                 <Pause size={16} className="shrink-0" />
                 Pause
@@ -164,7 +164,7 @@ return (
               <button
                 onClick={resume_event}
                 title="Continue recording after a pause"
-                className="flex items-center justify-center gap-2 rounded-lg border border-white/[0.08] bg-white/[0.02] px-3 py-2.5 text-sm font-medium text-slate-300 transition-colors hover:bg-white/[0.05] hover:text-sky-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/20 focus-visible:ring-offset-2 focus-visible:ring-offset-[#12151c] active:bg-white/[0.08]"
+                className="flex items-center justify-center gap-2 rounded-lg border border-white/[0.08] bg-white/[0.02] px-3 py-2.5 text-sm font-medium text-slate-300 transition-colors hover:bg-white/[0.05] hover:text-[#7dd3fc] focus:outline-none focus-visible:ring-2 focus-visible:ring-white/20 focus-visible:ring-offset-2 focus-visible:ring-offset-[#12151c] active:bg-white/[0.08]"
               >
                 <RotateCcw size={16} className="shrink-0" />
                 Resume
@@ -175,7 +175,7 @@ return (
               <button
                 onClick={new_session}
                 title="Start a fresh session in a new folder"
-                className="flex items-center gap-3 rounded-lg border border-white/[0.08] bg-white/[0.02] px-4 py-2.5 text-sm font-medium text-slate-200 transition-colors hover:bg-white/[0.05] hover:text-sky-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/20 focus-visible:ring-offset-2 focus-visible:ring-offset-[#12151c] active:bg-white/[0.08]"
+                className="flex items-center gap-3 rounded-lg border border-white/[0.08] bg-white/[0.02] px-4 py-2.5 text-sm font-medium text-slate-200 transition-colors hover:bg-white/[0.05] hover:text-[#bae6fd] focus:outline-none focus-visible:ring-2 focus-visible:ring-white/20 focus-visible:ring-offset-2 focus-visible:ring-offset-[#12151c] active:bg-white/[0.08]"
               >
                 <FilePlus size={17} className="shrink-0" />
                 New Session
@@ -184,7 +184,7 @@ return (
               <button
                 onClick={stop_event}
                 title="Stop recording and close the current session"
-                className="flex items-center gap-3 rounded-lg border border-red-500/20 bg-red-500/[0.06] px-4 py-2.5 text-sm font-medium text-red-300/90 transition-colors hover:bg-red-500/[0.12] focus:outline-none focus-visible:ring-2 focus-visible:ring-red-400/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[#12151c] active:bg-red-500/[0.16]"
+                className="flex items-center gap-3 rounded-lg border border-[#ef4444]/20 bg-[#ef4444]/[0.06] px-4 py-2.5 text-sm font-medium text-[#fca5a5] transition-colors hover:bg-[#ef4444]/[0.12] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#f87171]/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[#12151c] active:bg-[#ef4444]/[0.16]"
               >
                 <Square size={17} className="shrink-0" />
                 Stop Logging
@@ -196,7 +196,7 @@ return (
             <button
               onClick={showanalytics}
               title="Reload the latest statistics"
-              className="flex items-center gap-3 rounded-lg border border-sky-500/20 bg-sky-500/[0.06] px-4 py-2.5 text-sm font-medium text-sky-200/90 transition-colors hover:bg-sky-500/[0.12] focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[#12151c] active:bg-sky-500/[0.16]"
+              className="flex items-center gap-3 rounded-lg border border-[#0ea5e9]/20 bg-[#0ea5e9]/[0.06] px-4 py-2.5 text-sm font-medium text-[#bae6fd] transition-colors hover:bg-[#0ea5e9]/[0.12] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#38bdf8]/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[#12151c] active:bg-[#0ea5e9]/[0.16]"
             >
               <BarChart3 size={17} className="shrink-0" />
               Refresh Analytics
@@ -236,7 +236,7 @@ return (
           <div className="mb-6 flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-white/[0.04] ring-1 ring-inset ring-white/10">
-                <BarChart3 className="text-sky-400/90" size={17} />
+                <BarChart3 className="text-[#38bdf8]" size={17} />
               </div>
               <div>
                 <h2 className="text-base font-semibold text-slate-100">Session Analytics</h2>
@@ -262,7 +262,7 @@ return (
 
             <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-4 transition-colors hover:border-white/[0.12] hover:bg-white/[0.03]">
               <div className="flex items-center gap-2 text-slate-400">
-                <Activity size={15} className="text-violet-400/80" />
+                <Activity size={15} className="text-[#a78bfa]" />
                 <span className="text-[11px] font-medium uppercase tracking-[0.1em]">Sessions</span>
               </div>
               <p className={`mt-2.5 text-2xl font-semibold tabular-nums ${count.session_count ? "text-slate-50" : "text-slate-600"}`}>{count.session_count.toLocaleString()}</p>
@@ -270,7 +270,7 @@ return (
 
             <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-4 transition-colors hover:border-white/[0.12] hover:bg-white/[0.03]">
               <div className="flex items-center gap-2 text-slate-400">
-                <Keyboard size={15} className="text-sky-400/80" />
+                <Keyboard size={15} className="text-[#38bdf8]" />
                 <span className="text-[11px] font-medium uppercase tracking-[0.1em]">Keyboard</span>
               </div>
               <p className={`mt-2.5 text-2xl font-semibold tabular-nums ${count.key_count ? "text-slate-50" : "text-slate-600"}`}>{count.key_count.toLocaleString()}</p>
@@ -278,7 +278,7 @@ return (
 
             <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-4 transition-colors hover:border-white/[0.12] hover:bg-white/[0.03]">
               <div className="flex items-center gap-2 text-slate-400">
-                <MousePointerClick size={15} className="text-emerald-400/80" />
+                <MousePointerClick size={15} className="text-[#34d399]" />
                 <span className="text-[11px] font-medium uppercase tracking-[0.1em]">Left Clicks</span>
               </div>
               <p className={`mt-2.5 text-2xl font-semibold tabular-nums ${count.left_clicks ? "text-slate-50" : "text-slate-600"}`}>{count.left_clicks.toLocaleString()}</p>
@@ -286,7 +286,7 @@ return (
 
             <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-4 transition-colors hover:border-white/[0.12] hover:bg-white/[0.03]">
               <div className="flex items-center gap-2 text-slate-400">
-                <MousePointerClick size={15} className="text-emerald-400/80" />
+                <MousePointerClick size={15} className="text-[#34d399]" />
                 <span className="text-[11px] font-medium uppercase tracking-[0.1em]">Right Clicks</span>
               </div>
               <p className={`mt-2.5 text-2xl font-semibold tabular-nums ${count.right_clicks ? "text-slate-50" : "text-slate-600"}`}>{count.right_clicks.toLocaleString()}</p>
@@ -294,7 +294,7 @@ return (
 
             <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-4 transition-colors hover:border-white/[0.12] hover:bg-white/[0.03]">
               <div className="flex items-center gap-2 text-slate-400">
-                <Mouse size={15} className="text-emerald-400/80" />
+                <Mouse size={15} className="text-[#34d399]" />
                 <span className="text-[11px] font-medium uppercase tracking-[0.1em]">Middle Clicks</span>
               </div>
               <p className={`mt-2.5 text-2xl font-semibold tabular-nums ${count.middle_clicks ? "text-slate-50" : "text-slate-600"}`}>{count.middle_clicks.toLocaleString()}</p>
@@ -302,7 +302,7 @@ return (
 
             <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-4 transition-colors hover:border-white/[0.12] hover:bg-white/[0.03]">
               <div className="flex items-center gap-2 text-slate-400">
-                <Move size={15} className="text-amber-400/80" />
+                <Move size={15} className="text-[#fbbf24]" />
                 <span className="text-[11px] font-medium uppercase tracking-[0.1em]">Mouse Movement</span>
               </div>
               <p className={`mt-2.5 text-2xl font-semibold tabular-nums ${count.mouse_move ? "text-slate-50" : "text-slate-600"}`}>{count.mouse_move.toLocaleString()}</p>
@@ -310,7 +310,7 @@ return (
 
             <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-4 transition-colors hover:border-white/[0.12] hover:bg-white/[0.03] sm:col-span-2 xl:col-span-3">
               <div className="flex items-center gap-2 text-slate-400">
-                <ScrollText size={15} className="text-rose-400/80" />
+                <ScrollText size={15} className="text-[#fb7185]" />
                 <span className="text-[11px] font-medium uppercase tracking-[0.1em]">Mouse Wheel Scroll</span>
               </div>
               <p className={`mt-2.5 text-2xl font-semibold tabular-nums ${count.wheel ? "text-slate-50" : "text-slate-600"}`}>{count.wheel.toLocaleString()}</p>
