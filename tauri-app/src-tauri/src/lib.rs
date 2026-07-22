@@ -1,12 +1,16 @@
 // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
 mod listener;
 mod logger;
+mod tray;
+
+use std::sync::OnceLock;
 use tauri::image::Image;
 use tauri::{
     menu::{Menu, MenuItem},
     tray::TrayIconBuilder,
     Manager,
 };
+
 #[tauri::command]
 
 fn start_logging(folderPath: String) {
@@ -46,11 +50,27 @@ pub fn run() {
             }
         })
         .setup(|app| {
-            let show = MenuItem::with_id(app, "show", "Show Window", true, None::<&str>)?;
+            let start = MenuItem::with_id(app, "start", "▶ Start Logging", true, None::<&str>)?;
 
-            let exit = MenuItem::with_id(app, "exit", "Exit", true, None::<&str>)?;
+            let pause = MenuItem::with_id(app, "pause", "⏸ Pause Logging", false, None::<&str>)?;
 
-            let menu = Menu::with_items(app, &[&show, &exit])?;
+            let resume = MenuItem::with_id(app, "resume", "▶ Resume Logging", false, None::<&str>)?;
+
+            let new_session =
+                MenuItem::with_id(app, "new_session", "🆕 New Session", false, None::<&str>)?;
+
+            let stop = MenuItem::with_id(app, "stop", "⏹ Stop Logging", false, None::<&str>)?;
+
+            let show = MenuItem::with_id(app, "show", "🖥 Show Window", true, None::<&str>)?;
+
+            let exit = MenuItem::with_id(app, "exit", "❌ Exit", true, None::<&str>)?;
+
+            let menu = Menu::with_items(
+                app,
+                &[&start, &pause, &resume, &new_session, &stop, &show, &exit],
+            )?;
+
+
             let icon = app
                 .default_window_icon()
                 .expect("default icon not found")
@@ -60,6 +80,25 @@ pub fn run() {
                 .icon(icon)
                 .menu(&menu)
                 .on_menu_event(|app, event| match event.id().as_ref() {
+                    "start" => {
+                        println!("Start clicked");
+                    }
+
+                    "pause" => {
+                        println!("Pause clicked");
+                    }
+
+                    "resume" => {
+                        println!("Resume clicked");
+                    }
+
+                    "new_session" => {
+                        println!("New Session clicked");
+                    }
+
+                    "stop" => {
+                        println!("Stop clicked");
+                    }
                     "show" => {
                         let window = app.get_webview_window("main").unwrap();
 

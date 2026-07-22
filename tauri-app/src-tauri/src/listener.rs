@@ -6,11 +6,11 @@ use std::sync::atomic::{AtomicI32, Ordering};
 use std::sync::Mutex;
 use std::sync::OnceLock;
 
-#[derive(Debug)]
-enum Loggedstate {
+#[derive(Debug, Clone, Copy, PartialEq)]
+pub enum Loggedstate {
     Paused,
     Logging,
-    Stoped,
+    Stopped,
 }
 static Counter_key: AtomicI32 = AtomicI32::new(0);
 static Counter_mouse_button_left: AtomicI32 = AtomicI32::new(0);
@@ -98,11 +98,11 @@ pub fn stop_logging() {
     let mut state = CURRENT_STATE.get().unwrap().lock().unwrap();
     display_count();
     match *state {
-        Loggedstate::Stoped => {
+        Loggedstate::Stopped => {
             println!("Already stopped");
         }
         _ => {
-            *state = Loggedstate::Stoped;
+            *state = Loggedstate::Stopped;
             println!("Logging stopped");
         }
     }
